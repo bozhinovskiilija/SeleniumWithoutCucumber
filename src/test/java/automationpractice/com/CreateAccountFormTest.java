@@ -12,7 +12,7 @@ import automationpractice.com.pageObject.CreateAccount;
 import automationpractice.com.pageObject.CreateAccountForm;
 import automationpractice.com.pageObject.Homepage;
 import automationpractice.com.pageObject.SignInForm;
-import utils.EmailsGenerator;
+//import utils.EmailsGenerator;
 
 public class CreateAccountFormTest {
 
@@ -42,7 +42,7 @@ public class CreateAccountFormTest {
 
 	@AfterClass
 	public void closeAll() {
-		account.getAccountLogout().click();
+		//account.getAccountLogout().click();
 		driver.quit();
 	}
 
@@ -58,13 +58,16 @@ public class CreateAccountFormTest {
 
 	@Test(priority = 2)
 	public void authenticationPageEmailField() {
+
+		homepage.getSignInBtn().click();
+
 		// Without email
 		createAccount.getCreateAccountBtn().click();
 
 		Assert.assertTrue(createAccount.getEmailErrorMessage().isDisplayed());
 
 		// Wrong email format (mapko89ct, mapko89ct@gmail ...)
-		createAccount.setCreateAccountEmailField("marko");
+		createAccount.setCreateAccountEmailField("risto");
 		createAccount.getCreateAccountBtn().click();
 
 		Assert.assertTrue(createAccount.getEmailErrorMessage().isDisplayed());
@@ -77,7 +80,7 @@ public class CreateAccountFormTest {
 		Assert.assertTrue(createAccount.getEmailBeenRegistered().isDisplayed());
 
 		// Correct email
-		createAccount.setCreateAccountEmailField("mapko123ct@gmail.com");
+		createAccount.setCreateAccountEmailField("cepenkov@gmail.com");
 		createAccount.getCreateAccountBtn().click();
 
 		Assert.assertTrue(createAccountForm.getAccountCreationForm().isDisplayed());
@@ -85,10 +88,15 @@ public class CreateAccountFormTest {
 
 	@Test(priority = 3)
 	public void personalInfoFields() {
+
+		homepage.getSignInBtn().click();
+
+		createAccount.setCreateAccountEmailField("paraspur@gmail.com");
+		createAccount.getCreateAccountBtn().click();
 		// With values
 		createAccountForm.setCustomerFirstNameField("Marko");
 		createAccountForm.setCustomerLastNameField("Stevanovic");
-		createAccountForm.setCustomerEmailField("mapko89ct@gmail.com");
+		createAccountForm.setCustomerEmailField("paraspur@gmail.com");
 		createAccountForm.setCustomerPasswordField("tester");
 
 		createAccountForm.getAccountCreationForm().click();
@@ -114,6 +122,12 @@ public class CreateAccountFormTest {
 
 	@Test(priority = 4)
 	public void requiredFieldsEmpty() {
+
+		homepage.getSignInBtn().click();
+
+		createAccount.setCreateAccountEmailField("paraspur11@gmail.com");
+		createAccount.getCreateAccountBtn().click();
+
 		createAccountForm.getAddressAliasField().clear();
 		createAccountForm.setCustomerEmailField("");
 		createAccountForm.selectCountry("-");
@@ -139,6 +153,11 @@ public class CreateAccountFormTest {
 
 	@Test(priority = 5)
 	public void requiredFieldsInputFormat() throws Exception {
+		homepage.getSignInBtn().click();
+
+		createAccount.setCreateAccountEmailField("paraspur252@gmail.com");
+		createAccount.getCreateAccountBtn().click();
+
 		// Wrong format
 		createAccountForm.setCustomerEmailField("mapko89ct@gmail");
 		createAccountForm.setCustomerPasswordField("test");
@@ -170,6 +189,12 @@ public class CreateAccountFormTest {
 
 	@Test(priority = 6)
 	public void createAccountSuccessfully() {
+
+		homepage.getSignInBtn().click();
+
+		createAccount.setCreateAccountEmailField("diimon@gmail.com");
+		createAccount.getCreateAccountBtn().click();
+
 		// Required fields filled
 		createAccountForm.setCustomerFirstNameField("John");
 		createAccountForm.setCustomerLastNameField("Doe");
@@ -188,9 +213,9 @@ public class CreateAccountFormTest {
 
 		Assert.assertTrue(createAccountForm.getEmailBeenRegistered().isDisplayed());
 
-		createAccountForm.setCustomerEmailField(EmailsGenerator.getNextEmail());
-		createAccountForm.setCustomerPasswordField("tester123");
-		createAccountForm.getRegisterBtn().click();
+		//createAccountForm.setCustomerEmailField(EmailsGenerator.getNextEmail());
+		//createAccountForm.setCustomerPasswordField("tester123");
+		//createAccountForm.getRegisterBtn().click();
 
 		Assert.assertTrue(createAccountForm.successfullyCreatedAccount().isDisplayed());
 	}

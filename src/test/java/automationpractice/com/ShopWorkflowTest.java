@@ -14,7 +14,7 @@ import automationpractice.com.pageObject.CartSummary;
 import automationpractice.com.pageObject.Clothes;
 import automationpractice.com.pageObject.ShoppingActions;
 import automationpractice.com.pageObject.SignInForm;
-import utils.EmailsGenerator;
+//import utils.EmailsGenerator;
 
 public class ShopWorkflowTest {
 
@@ -174,7 +174,6 @@ public class ShopWorkflowTest {
 		Assert.assertTrue(cart.getCartTabCheckOutBtn().isDisplayed());
 
 		action.click(cart.getCartTabCheckOutBtn()).build().perform();
-		;
 
 		Assert.assertTrue(summary.getCartSummaryTable().isDisplayed());
 		Assert.assertEquals(summary.getCartSummTotalProductsNum().size(), 2);
@@ -217,14 +216,14 @@ public class ShopWorkflowTest {
 
 		Assert.assertTrue(signinForm.getSignInForm().isDisplayed());
 
-		signinForm.setEmailField(EmailsGenerator.getCurrentEmail());
+		signinForm.setEmailField("crvenkapa@gmail.com");
 		signinForm.setPasswordField("tester123");
 		signinForm.getSignInBtn().click();
 	}
 
 	@Test(priority = 8)
 	public void billingAndDeliveryAddress() {
-		Assert.assertEquals(summary.getCartSummBillingAdressName().getText(), "John Doe");
+		Assert.assertEquals(summary.getCartSummBillingAdressName().getText(), "pero sdsds");
 		Assert.assertEquals(summary.getCartSummBillingAdressOne().getText(), "Centar");
 		Assert.assertEquals(summary.getCartSummBillingAdressCityState().getText(), "Novi Sad, Connecticut 21000");
 		Assert.assertEquals(summary.getCartSummBillingAdressCountry().getText(), "United States");
